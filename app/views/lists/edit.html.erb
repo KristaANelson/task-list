@@ -1,0 +1,6 @@
+Update List Name:
+
+<%= bootstrap_form_for [@list],  :html => { multipart: true }  do |f| %>
+<%= f.text_field :title, hide_label: true, placeholder: "#{@list.title}" %>
+<%= f.submit "Submit", class: "btn btn-default btn-lg" %>
+<% end %>
