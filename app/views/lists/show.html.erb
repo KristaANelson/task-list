@@ -7,6 +7,7 @@
 <%= f.text_area :description, placeholder: "description" %>
 <%= f.date_field :due_date, :class => "form-control", type: "date", value: Date.today %>
 <%= f.hidden_field :list_id, value: @list.id %>
+<%= f.file_field :file, :label => "Select attachment to upload", class: "file"%>
 <%= f.submit "Submit", class: "btn btn-info" %>
 <% end %>
 </div>

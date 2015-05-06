@@ -15,6 +15,9 @@ gem 'best_in_place', '~> 3.0.1'
 gem "responders"
 gem 'pry'
 gem 'pg'
+gem 'aws-sdk'
+gem "paperclip", "~> 4.2"
+gem 'figaro'
 
 group :development, :test do
   gem 'sqlite3'
