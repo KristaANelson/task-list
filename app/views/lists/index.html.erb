@@ -1,7 +1,7 @@
 <div class="welcome col-md-12 text-center"> <h1> Welcome to Task List Manager </h1></div>
 <div class="new_list col-md-2">
 
-  <%= bootstrap_form_for [@list],  :html => { multipart: true }, :url => { :controller => 'tasks', :action => "update_file" }  do |f| %>
+  <%= bootstrap_form_for [@list],  :html => { multipart: true }  do |f| %>
   <h3> Add a new list: </h3>
     <%= f.text_field :title, placeholder: "Task List" %>
     <%= f.submit "Submit", class: "btn btn-info" %>

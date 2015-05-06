@@ -78,4 +78,20 @@ RSpec.feature "User", type: :feature do
     expect(page).to have_content("Completed Tasks for:")
     expect(page).to have_content("Mark Incomplete")
   end
+
+  it "can attach a file (e.g. a PDF or image) when creating a task." do
+    @list = List.create(title: "Title3434")
+    visit list_path(@list)
+
+
+    expect(page).to have_content("Select attachment to upload")
+  end
+
+  it "can attach a file (e.g. a PDF or image) to a given task if one isn' already attached" do
+    @list = List.create(title: "Title3434")
+    @task = Task.create!(list_id: @list.id, title: "title", description: "description", due_date: Date.today)
+    visit list_path(@list)
+
+    expect(page).to have_link("Attach File")
+  end
 end

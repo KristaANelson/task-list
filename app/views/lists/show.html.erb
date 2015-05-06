@@ -51,7 +51,7 @@
           <td><%= button_to "Delete", {:controller => :tasks,
               :action => 'destroy', :id => task.id }, :method => :delete %>
           </td>
-          <td>
+          <td class=<%="#{task.id}"%> >
             <% if task.pdf_attached? %>
               <ul class="list-inline">
                 <li><%= (link_to "Download", task.file.url, class: "btn btn-primary")  %></li>
