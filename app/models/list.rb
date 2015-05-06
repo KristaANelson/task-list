@@ -1,6 +1,8 @@
 class List < ActiveRecord::Base
   has_many :tasks
 
-  scope :active, -> { where(archieved: false) }
-  scope :archieved, -> { where(archieved: true) }
+  validates :title, presence: true
+  
+  scope :active, -> { where(archived: false) }
+  scope :archived, -> { where(archived: true) }
 end

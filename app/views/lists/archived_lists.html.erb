@@ -1,0 +1,36 @@
+<% if @lists.archived.empty? %>
+<h1 class="text-center"> There are no Archived Task Lists
+<%= link_to "See Active Tables", lists_path, class: "btn btn-info" %> </h1>
+<% else %>
+<div class="data-table row text-center listed-lists" >
+  <table id="index" class="table table-striped table-bordered table-hover task-table">
+    <thead>
+      <tr> <h3> Archived Task Lists <%= link_to "Update Tables", lists_path, class: "btn btn-default" %></h3> </tr>
+      <tr>
+        <th> Title (click to update) </th>
+        <th> Tasks </th>
+        <th> Action </th>
+        <th> Delete </th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @lists.archived.each do |list| %>
+      <tr>
+        <td><%= best_in_place list, :title, :as => :input %></td>
+        <td><%= link_to "#{list.tasks.count} tasks", list_path(list.id) %></td>
+        <td class="text-center">
+           <span class="status"><%=best_in_place list,
+              :archived, :as => :checkbox,
+              :collection => {:false => "Archive", true: "Unarchive"} %></span>
+        </td>
+        <td><%= button_to "Delete", {:controller => :lists,
+              :action => 'destroy', :id => list.id }, :method => :delete %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to "Update Tables", lists_path, class: "btn btn-default" %>
+<%= link_to "See Archived Task Lists", archived_lists_path, class: "btn btn-default" %>
+</div>
+<% end %>

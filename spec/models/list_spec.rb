@@ -1,16 +1,33 @@
 require 'rails_helper'
 
-RSpec.describe Task, type: :model do
+RSpec.describe List, type: :model do
   it "should be valid with a title" do
     list = List.new(title: "title")
 
-    expect(task).to be_valid
+    expect(list).to be_valid
   end
 
-  it "defaults to archived" do
+  it "should be invalid with a title" do
+    list = List.new(title: "")
+
+    expect(list).to be_invalid
+  end
+
+  it "defaults to archived false" do
     list = List.create(title: "title")
-    list.update_attributes(archieved: true)
+
+    list.update_attributes(archived: true)
     list.save
-    expect(list.archieved).to eq true
+
+    expect(list.archived).to eq true
+  end
+
+  it "can be udpated to archived status" do
+    list = List.create(title: "title")
+
+    list.update_attributes(archived: false)
+    list.save
+
+    expect(list.archived).to eq false
   end
 end

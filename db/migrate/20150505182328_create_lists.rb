@@ -2,7 +2,7 @@ class CreateLists < ActiveRecord::Migration
   def change
     create_table :lists do |t|
       t.string :title
-      t.boolean :archieved, default: false
+      t.boolean :archived, default: false
 
       t.timestamps null: false
     end

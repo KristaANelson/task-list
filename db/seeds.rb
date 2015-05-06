@@ -12,7 +12,7 @@ class Seed
 
   def generate_lists
     10.times do |i|
-      list = List.create!(title:   "list#{i}")
+      list = List.create!(title:   "A Really Great Title#{i + 1}")
       puts "#{list.title} created!"
     end
   end

@@ -1,6 +1,7 @@
 class ListsController < ApplicationController
+  before_action :set_list, only: [:show, :edit, :update, :delete]
   respond_to :html, :json
-  
+
   def index
     @list = List.new
     @lists = List.all
@@ -8,17 +9,16 @@ class ListsController < ApplicationController
 
   def show
     @task = Task.new
-    @list = List.find(params[:id])
+    @shown_tasks = params[:complete] ? @list.tasks.send(params[:complete]) : @list.tasks
+    @shown = params[:complete] ? params[:complete] : "all"
   end
 
   def edit
-    @list = List.find(params[:id])
   end
 
   def update
-    @list = List.find(params[:id])
     respond_to do |format|
-      if @list.update_attributes(title: params[:list][:title])
+      if @list.update_attributes(list_params)
         format.html { redirect_to(lists_path) }
         format.json { respond_with_bip(@list) }
       else
@@ -28,16 +28,9 @@ class ListsController < ApplicationController
     end
   end
 
-  def archive_list
-    @list = List.find(params[:id])
-    @list.update_attributes({archieved: true})
-    redirect_to lists_path
-  end
-
   def destroy
-    @list = List.find(params[:id])
-    @list.destroy
-    redirect_to lists_path
+    List.find(params[:id]).destroy
+    redirect_to :back
   end
 
   def create
@@ -47,5 +40,19 @@ class ListsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def archived_lists
+    @lists = List.archived
+  end
+
+  private
+
+  def list_params
+    params.require(:list).permit(:title, :archived)
+  end
+
+  def set_list
+    @list = List.find(params[:id])
   end
 end

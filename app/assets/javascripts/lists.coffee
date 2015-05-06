@@ -3,5 +3,6 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 jQuery ->
-  $('#lists').dataTable
+  $('#tasks').dataTable
     sPaginationType: "full_numbers"
+  $('#index').dataTable
