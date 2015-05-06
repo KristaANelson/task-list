@@ -10,10 +10,8 @@ After cloning the repo, cd into the task-list and bundle install. You will then 
 ##Live Production Site
 https://task-list-manager.herokuapp.com/
 
-Here are the specs:
+##The Listed Specs:
 https://gist.github.com/jcasimir/cd58bfa37bc36c0c658e
-
-Hers are the guidelines: 
 
 ## Rubric
 
