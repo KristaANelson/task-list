@@ -4,23 +4,16 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
     @task.file = params[:task][:file].tempfile if params[:task][:file]
-    if @task.save
-      redirect_to list_path(id: @task.list_id )
-    else
-      render :new
+    @task.save
+    redirect_to list_path(id: @task.list_id )
     end
-  end
 
   def update
     @task = Task.find(params[:id])
     respond_to do |format|
-      if @task.update_attributes(task_params)
+      @task.update_attributes(task_params)
         format.html { redirect_to list_path(@task.list) }
         format.json { respond_with_bip(@task) }
-      else
-        format.html { redirect_to lists_path }
-        format.json { respond_with_bip(@task) }
-      end
     end
   end
 
@@ -29,9 +22,8 @@ class TasksController < ApplicationController
   end
 
   def update_file
-    require 'pry'; binding.pry
     @task = Task.find(params[:id])
-    @task.file = params[task][file].tempfile
+    @task.file = params[:task][:file].tempfile if params[:task][:file]
     @task.save
     redirect_to list_path(id: @task.list.id)
   end

@@ -27,4 +27,11 @@ group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
   gem 'spring'
+  gem 'simplecov', :require => false
+end
+
+group :production do
+  gem 'rails_12factor', '0.0.2'
+  gem 'rmagick', '2.13.2'
+  gem 'fog'
 end

@@ -13,9 +13,6 @@ class ListsController < ApplicationController
     @shown = params[:complete] ? params[:complete] : "all"
   end
 
-  def edit
-  end
-
   def update
     respond_to do |format|
       if @list.update_attributes(list_params)
@@ -35,11 +32,8 @@ class ListsController < ApplicationController
 
   def create
     @list = List.new({title: params[:list][:title]})
-    if @list.save
-      redirect_to lists_path
-    else
-      render :new
-    end
+    @list.save
+    redirect_to lists_path
   end
 
   def archived_lists
