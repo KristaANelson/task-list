@@ -4,7 +4,7 @@ class ListsController < ApplicationController
 
   def index
     @list = List.new
-    @lists = List.all
+    @lists = List.includes(:tasks).all
   end
 
   def show

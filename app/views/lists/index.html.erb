@@ -1,7 +1,7 @@
 <div class="welcome col-md-12 text-center"> <h1> Welcome to Task List Manager </h1></div>
 <div class="new_list col-md-2">
 
-  <%= bootstrap_form_for [@list],  :html => { multipart: true }  do |f| %>
+  <%= bootstrap_form_for [@list],  :html => { multipart: true }, :url => { :controller => 'tasks', :action => "update_file" }  do |f| %>
   <h3> Add a new list: </h3>
     <%= f.text_field :title, placeholder: "Task List" %>
     <%= f.submit "Submit", class: "btn btn-info" %>
@@ -25,7 +25,7 @@
       <% @lists.active.each do |list| %>
         <tr>
           <td><%= best_in_place list, :title, :as => :input %></td>
-          <td><%= link_to "#{list.tasks.count} tasks", list_path(id: list.id, complete: "incompleted") %></td>
+          <td><%= link_to "#{list.tasks.size} tasks", list_path(id: list.id, complete: "incompleted") %></td>
           <td><ul class="list-inline"><li><span class="text-center btn status"><%=best_in_place list,
               :archived, :as => :checkbox,
               :collection => {:false => "Archive", true: "Unarchive"} %></li></ul>

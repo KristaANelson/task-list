@@ -34,6 +34,7 @@
           <th> Due Date </th>
           <th> Status </th>
           <th> Action </th>
+          <th> Attachment </th>
         </tr>
       </thead>
       <tbody>
@@ -43,12 +44,22 @@
           <td><%= best_in_place task, :description, :as => :input %></td>
           <td><%= best_in_place task, :due_date, display_with: lambda { |dt| dt.strftime("%d-%m-%y") }, :as => :date%></td>
           <td class="text-center">
-            <span class="status"><%=best_in_place task,
+            <span class="btn status"><%=best_in_place task,
               :complete, :as => :checkbox,
               :collection => {:false => " Mark Complete", true: " Mark Incomplete"} %>
             </span></td>
-          <td><%= button_to "delete", {:controller => :tasks,
+          <td><%= button_to "Delete", {:controller => :tasks,
               :action => 'destroy', :id => task.id }, :method => :delete %>
+          </td>
+          <td>
+            <% if task.pdf_attached? %>
+              <ul class="list-inline">
+                <li><%= (link_to "Download", task.file.url, class: "btn btn-primary")  %></li>
+                <li><%= (button_to "X", delete_file_path(id: task.id))  %></li>
+              </ul>
+            <% else %>
+            <%= (link_to "Attach File", add_file_path(id: task.id), class: "btn btn-default")  %>
+            <% end %>
           </td>
         </tr>
       <% end %>

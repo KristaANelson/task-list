@@ -1,0 +1,8 @@
+<div class="text-cetner add_file col-md-4 col-md-push-4">
+<h3> Add File to: <%= @task.title %> </h3>
+<%= bootstrap_form_for [@task], :html => { multipart: true }  do |f| %>
+<%= f.file_field :file, :label => "Select attachment to upload", class: "file"%>
+<%= f.hidden_field :list_id, :value => @task.list.id%>
+<%= f.submit "Submit", class: "btn btn-info" %>
+<% end %>
+</div>
